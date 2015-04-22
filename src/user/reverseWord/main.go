@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"strings"
 )
 
@@ -9,8 +10,15 @@ func main() {
 	input := "this is my book"
 	secondInput := strings.Split(reverse(input), " ")
 	fmt.Println(secondInput)
+	file, err := os.Create("./output")
+
+	if err != nil {
+		panic(err)
+	}
+
 	for _, c := range secondInput {
-		fmt.Print(reverse(c) + " ")
+		file.WriteString(reverse(c))
+		file.WriteString(" ")
 	}
 }
 
